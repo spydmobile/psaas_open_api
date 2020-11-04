@@ -1,65 +1,54 @@
 /**
  * PSaaS Open API App.
 */
+// load all dependencies.
 
+const WebSocket = require('ws')
+const isMobile = require('is-mobile');
+const path = require('path');
+const express = require('express')
+const favicon = require('express-favicon');
+const session = require('express-session')
 
+// allow a .env file to act as environemtn like on server.
 if (process.env.NODE_ENV !== 'prodcution') {
     require('dotenv').config()
 }
+//set the app name
 const appFullName = "PSaaS Open API"
+//set the app port.
 const appPort = 3200
 
-const WebSocket = require('ws')
 
-const isMobile = require('is-mobile');
-const path = require('path');
-
-const express = require('express')
-
-const favicon = require('express-favicon');
-
-const session = require('express-session')
 
 const app = express()
-
+const middlewareStub = async (req, res, next) => {
+    console.log("This is a middelare stub")
+    return next()
+}
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
-app.use(favicon(__dirname + '/webui/icons/favicon-96x96.png'));
+app.use(favicon(__dirname + '/web/icons/favicon.ico'));
 app.use(express.urlencoded({ extended: false }))
-// app.use(cookieParser())
-// app.use(cookieSession({
-//     keys: ['key1', 'key2']
-// }));
-//app.use(flash())
+
 app.use(session({
     secret: 'secret12345',
     resave: false,
     saveUninitialized: false
 }))
 
-
-
-//app.use(methodOverride('_method'))
-
-
-
 app.use(express.json());
 //app.use('/webui', express.static('webui'))
 app.use('/web', express.static(__dirname + '/web'));
 
 
-app.get('/', checkMobile, async (req, res) => {
+app.get('/', middlewareStub, async (req, res) => {
     console.log("Routing: /")
     let user = await req.user
     res.render('index.ejs', { user: user })
 })
 
 
-async function checkMobile(req, res, next) {
-    let userIsMobile = await isMobile()
-    req.user.isMobile = userIsMobile
-    return next()
-}
 
 
 const wss = new WebSocket.Server({
