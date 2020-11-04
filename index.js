@@ -10,7 +10,7 @@ const express = require('express')
 const favicon = require('express-favicon');
 const session = require('express-session')
 
-// allow a .env file to act as environemtn like on server.
+// allow a .env file to act as environment like on server.
 if (process.env.NODE_ENV !== 'prodcution') {
     require('dotenv').config()
 }
@@ -23,7 +23,7 @@ const appPort = 3200
 
 const app = express()
 const middlewareStub = async (req, res, next) => {
-    console.log("This is a middelare stub")
+    console.log("This is a middleware stub")
     return next()
 }
 app.set('views', path.join(__dirname, 'views'));
@@ -38,7 +38,7 @@ app.use(session({
 }))
 
 app.use(express.json());
-//app.use('/webui', express.static('webui'))
+// setup web folder as static
 app.use('/web', express.static(__dirname + '/web'));
 
 
