@@ -1,0 +1,31 @@
+{
+  "name": "psaas_open_api",
+  "version": "1.0.0",
+  "description": "Provides an Open API - REST api for PSaaS Wildfire Modelling System. this is integrated into the #psaas-open-api channel on the PSaaS Discord via webhook.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spydmobile/psaas_open_api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spydmobile/psaas_open_api/issues"
+  },
+  "homepage": "https://github.com/spydmobile/psaas_open_api#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
+    "express-session": "^1.17.1",
+    "is-mobile": "^2.2.2",
+    "jsonfile": "^6.1.0",
+    "path": "^0.12.7",
+    "ws": "^7.3.1"
+  }
+}
