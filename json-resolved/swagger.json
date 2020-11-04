@@ -42,7 +42,7 @@
         }, {
           "name" : "pageLimit",
           "in" : "query",
-          "description" : "max pages of objects returned",
+          "description" : "max pages of templates returned",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -55,7 +55,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Successful pull of object data",
+            "description" : "Successful pull of template data",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -70,7 +70,7 @@
         }
       },
       "post" : {
-        "description" : "Creates new PSaaS Object",
+        "description" : "Creates new PSaaS template",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -83,7 +83,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "Successful creation of object data"
+            "description" : "Successful creation of template object"
           }
         }
       }
@@ -112,7 +112,7 @@
           },
           "name" : {
             "type" : "string",
-            "example" : "thing Name"
+            "example" : "my template name"
           }
         }
       }
