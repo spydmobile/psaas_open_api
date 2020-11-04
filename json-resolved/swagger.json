@@ -59,10 +59,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/inline_response_200"
-                  }
+                  "$ref" : "#/components/schemas/Templates"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Templates"
                 }
               }
             }
@@ -75,7 +77,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/body"
+                "$ref" : "#/components/schemas/Template"
               }
             }
           },
@@ -109,10 +111,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/inline_response_200"
-                  }
+                  "$ref" : "#/components/schemas/Template"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Template"
                 }
               }
             }
@@ -123,20 +127,14 @@
   },
   "components" : {
     "schemas" : {
-      "inline_response_200" : {
-        "properties" : {
-          "id" : {
-            "type" : "integer",
-            "example" : 4
-          },
-          "name" : {
-            "type" : "string",
-            "example" : "thing Name"
-          }
+      "Templates" : {
+        "type" : "array",
+        "description" : "Array of template objectes.",
+        "items" : {
+          "$ref" : "#/components/schemas/Template"
         }
       },
-      "body" : {
-        "type" : "object",
+      "Template" : {
         "properties" : {
           "id" : {
             "type" : "integer",
@@ -144,9 +142,10 @@
           },
           "name" : {
             "type" : "string",
-            "example" : "my template name"
+            "example" : "My Template"
           }
-        }
+        },
+        "description" : "Model containing template info"
       }
     }
   }
