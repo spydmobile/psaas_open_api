@@ -1,0 +1,121 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "PSaaS Open API",
+    "description" : "First kick at the cat.",
+    "termsOfService" : "http://psaas.vm.sparcsonline.com/content/psaas-terms-use",
+    "contact" : {
+      "name" : "Franco",
+      "url" : "https://spyd.com",
+      "email" : "spydmobile@gmail.com"
+    },
+    "license" : {
+      "name" : "none",
+      "url" : "https://spyd.com"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "htts://localhost:3200/api/V1",
+    "description" : "Dev Server"
+  }, {
+    "url" : "https://psaasapi.intellifirenwt.com/v1",
+    "description" : "Production Server"
+  } ],
+  "paths" : {
+    "/templates" : {
+      "get" : {
+        "description" : "Obtain templates from psaas",
+        "parameters" : [ {
+          "name" : "bodyLimit",
+          "in" : "query",
+          "description" : "max temnplates returned",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "maximum" : 20,
+            "minimum" : 10,
+            "type" : "integer",
+            "example" : 15
+          }
+        }, {
+          "name" : "pageLimit",
+          "in" : "query",
+          "description" : "max pages of objects returned",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "maximum" : 5,
+            "minimum" : 1,
+            "type" : "integer",
+            "example" : 2
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful pull of object data",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "description" : "Creates new PSaaS Object",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful creation of object data"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "inline_response_200" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "example" : 4
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "thing Name"
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "example" : 4
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "thing Name"
+          }
+        }
+      }
+    }
+  }
+}
