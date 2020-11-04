@@ -87,6 +87,38 @@
           }
         }
       }
+    },
+    "/templates/{id}" : {
+      "get" : {
+        "description" : "grab a specific template by ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The ID of the template",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "example" : 55
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success grabbing template",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
