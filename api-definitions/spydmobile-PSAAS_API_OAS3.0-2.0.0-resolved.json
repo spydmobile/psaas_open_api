@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PSaaS Open API",
+    "description": "First kick at the cat.",
+    "termsOfService": "http://psaas.vm.sparcsonline.com/content/psaas-terms-use",
+    "contact": {
+      "name": "Franco",
+      "url": "https://spyd.com",
+      "email": "spydmobile@gmail.com"
+    },
+    "license": {
+      "name": "none",
+      "url": "https://spyd.com"
+    },
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "htts://localhost:3200/api/V1",
+      "description": "Dev Server"
+    },
+    {
+      "url": "https://psaasapi.intellifirenwt.com/v1",
+      "description": "Production Server"
+    }
+  ],
+  "paths": {
+    "/templates": {
+      "get": {
+        "description": "Obtain templates from psaas",
+        "parameters": [
+          {
+            "name": "bodyLimit",
+            "in": "query",
+            "description": "max temnplates returned",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 20,
+              "minimum": 10,
+              "type": "integer",
+              "example": 15
+            }
+          },
+          {
+            "name": "pageLimit",
+            "in": "query",
+            "description": "max pages of templates returned",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 5,
+              "minimum": 1,
+              "type": "integer",
+              "example": 2
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful pull of template data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Templates"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Templates"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates new PSaaS template",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Template"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Template"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation of template object"
+          }
+        }
+      }
+    },
+    "/templates/{id}": {
+      "get": {
+        "description": "grab a specific template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the template",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "example": 55
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success grabbing template",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Template"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Template"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Templates": {
+        "type": "array",
+        "description": "Array of template objects.",
+        "items": {
+          "$ref": "#/components/schemas/Template"
+        }
+      },
+      "Template": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 4
+          },
+          "name": {
+            "type": "string",
+            "example": "My Template"
+          }
+        },
+        "description": "Model containing PSaaS template info"
+      }
+    }
+  }
+}
